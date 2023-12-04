@@ -1,0 +1,15 @@
+services:
+  backend-container:
+    build:
+      dockerfile: /home/ubuntu/dockerComposeURL/Dockerfile
+    ports:
+      - "8000:3000"
+  
+  frontend-container:
+    build:
+      context: .
+      dockerfile: /home/ubuntu/dockerComposeURL/Dockerfile.nginx
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - backend-container
