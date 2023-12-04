@@ -25,7 +25,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(tempValue);
   // Sending Request For Checking Authentication
 
-  const URL = "https://quiz-network-lhfp.onrender.com";
+  const URL = "http://3.81.46.136:8000";
   axios.defaults.withCredentials = true;
   const AuthUser = async () => {
     await axios.get(`${URL}/auth`).then((response) => {
