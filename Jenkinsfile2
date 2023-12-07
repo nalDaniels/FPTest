@@ -2,7 +2,7 @@ pipeline {
     agent { label 'DockerAgent' } 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('lani23-dockerhub')
-        PATH = "/home/ubuntu/.nvm/versions/node/v10.24.1/bin:$PATH"
+       
     }
     
     stages {
@@ -28,25 +28,6 @@ pipeline {
               }
        
 
-        stage('BuildTestBackend') {
-            steps {
-              dir('routes') {
-              
-                sh '''#!/bin/bash
-                docker stop be_test || true
-                docker rm be_test || true
-                sudo docker build --no-cache -t djtoler/dp9backend .
-                docker run -d -p 8000:8000 --name be_test djtoler/dp9backend
-                IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=DP9_Docker_Instance" --query "Reservations[*].Instances[*].PublicIpAddress" --output text)
-                export IP
-                echo "IP is $IP"
-                curl -f http://$IP:8000/api/products/
-                docker stop be_test
-                docker rm be_test
-              '''
-              }
-            }
-        }
         
          stage('BuildBackend') {
             steps {
