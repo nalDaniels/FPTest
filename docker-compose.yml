@@ -1,15 +1,16 @@
 services:
   backend-container:
     build:
-      dockerfile: /home/ubuntu/dockerComposeURL/Dockerfile
+      dockerfile: /home/ubuntu/fptest/routes/Dockerfile.be
     ports:
-      - "8000:3000"
+      - "3000:8000"
+  
   
   frontend-container:
     build:
       context: .
-      dockerfile: /home/ubuntu/dockerComposeURL/Dockerfile.nginx
+      dockerfile: /home/ubuntu/fptest/react/Dockerfile.fe
     ports: 
-      - "3000:3000"
+      - "80:3000"
     depends_on: 
-      - backend-container
+      - app-container
