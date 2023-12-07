@@ -3,7 +3,7 @@ services:
     build:
       dockerfile: /home/ubuntu/fptest/routes/Dockerfile.be
     ports:
-      - "3000:8000"
+      - "8000:8000"
   
   
   frontend-container:
@@ -11,6 +11,6 @@ services:
       context: .
       dockerfile: /home/ubuntu/fptest/react/Dockerfile.fe
     ports: 
-      - "80:3000"
+      - "3000:3000"
     depends_on: 
       - app-container
