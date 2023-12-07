@@ -25,7 +25,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(tempValue);
   // Sending Request For Checking Authentication
 
-  const URL = "http://54.224.207.242:3000";
+  const URL = "http://54.224.207.242:8000";
   axios.defaults.withCredentials = true;
   const AuthUser = async () => {
     await axios.get(`${URL}/auth`).then((response) => {
