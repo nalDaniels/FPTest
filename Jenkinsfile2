@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'DockerAgent' } 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('djtoler-dockerhub')
+        DOCKERHUB_CREDENTIALS = credentials('lani23-dockerhub')
         PATH = "/home/ubuntu/.nvm/versions/node/v10.24.1/bin:$PATH"
     }
     
@@ -20,9 +20,9 @@ pipeline {
         stage('BuildFrontend') {
             steps {
               dir('react') {
-                sh 'docker build --no-cache -t user/imagetag .'
+                sh 'docker build --no-cache -t lani23/frontend .'
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh 'docker push user/imagetag'  // Corrected the Docker image tag for push
+                sh 'docker push lani23/frontend'  // Corrected the Docker image tag for push
             }
         }
               }
@@ -30,14 +30,8 @@ pipeline {
 
         stage('BuildTestBackend') {
             steps {
-              dir('backend') {
-                //stop and remove any of our backend containers that may still be on our instance
-                //build the backend image 
-                //start the backend container
-                //dynamically grab the current ip address of our instance
-                //store it in a variable
-                //curl a backend api endpoint with the -f(failure) flag so the script stops when theres a 400/500 response and keeps going otherwise
-                //after a successful request, stop and remove the container
+              dir('routes') {
+              
                 sh '''#!/bin/bash
                 docker stop be_test || true
                 docker rm be_test || true
@@ -54,7 +48,16 @@ pipeline {
             }
         }
         
-        
+         stage('BuildBackend') {
+            steps {
+              dir('routes') {
+                sh 'docker build --no-cache -t lani23/backend .'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'docker push lani23/backend'  // Corrected the Docker image tag for push
+            }
+        }
+              }
+
         stage('Deploy') {
             steps {
                 sh 'docker compose up' 
