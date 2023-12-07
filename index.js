@@ -51,15 +51,7 @@ app.use(
     },
   })
 );
-app.use(express.json());
-// To initialize cors
-app.use(
-  cors({
-    origin: true,
-    method: ["GET", "POST"],
-    credentials: true,
-  })
-); // It help in sending data from one end point to another end point
+ // It help in sending data from one end point to another end point
 
 app.use(express.static(path.join(__dirname + "/public")));
 // For handling many requests
