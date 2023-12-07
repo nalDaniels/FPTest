@@ -15,6 +15,8 @@ import Quiz from "./afterLogin/Quiz";
 
 import "./App.scss";
 
+axios.defaults.baseURL = "http://localhost:8000"
+
 function App() {
   let tempValue = false;
   if (JSON.parse(localStorage.getItem("IsAuth")) !== null) {
@@ -25,7 +27,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(tempValue);
   // Sending Request For Checking Authentication
 
-  const URL = "http://54.224.207.242:8000";
+  const URL = ;
   axios.defaults.withCredentials = true;
   const AuthUser = async () => {
     await axios.get(`${URL}/auth`).then((response) => {
