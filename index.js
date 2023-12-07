@@ -26,10 +26,10 @@ const PORT = process.env.PORT || 8000;
 // dotenv is used to store passwords
 dotenv.config();
 
-const username = process.env.DB_USERNAME;
-const password = process.env.DB_PASSWORD;
+const username = "kurafinalpj";
+const password = "kurafinalpj";
 
-const URL = `mongodb://${username}:${password}@ac-yiuldeo-shard-00-00.8pambxl.mongodb.net:27017,ac-yiuldeo-shard-00-01.8pambxl.mongodb.net:27017,ac-yiuldeo-shard-00-02.8pambxl.mongodb.net:27017/quiz-network?ssl=true&replicaSet=atlas-xlqrrv-shard-0&authSource=admin&retryWrites=true&w=majority`;
+const URL = `mongodb+srv://kurafinalpj:kurafinalpj@cluster0.mjwldbe.mongodb.net/?retryWrites=true&w=majority`;
 
 // username and passwords passed as a parameter in Connection function
 connection.Connection(username, password);
